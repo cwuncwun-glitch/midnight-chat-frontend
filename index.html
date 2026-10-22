@@ -47,23 +47,23 @@
                 });
 
                 if (!response.ok) {
-                    throw new Error(`HTTP 错误！状态码: ${response.status}`);
+                    throw new Error(`HTTP 错误! 状态码: ${response.status}`);
                 }
 
                 const data = await response.json();
-                
-                // 显示后端返回的消息（若没有 reply 字段则尝试读取 response/message）
+
+                // 显示后端返回的消息
                 const botReply = data.reply || data.response || data.message || JSON.stringify(data);
                 chatBox.innerHTML += `<div class="message bot"><b>机器人:</b> ${botReply}</div>`;
 
             } catch (error) {
                 console.error('发送失败:', error);
+                alert('发送失败，错误信息: ' + error.message);
                 chatBox.innerHTML += `<div class="message error"><b>错误:</b> 无法连接后端服务器，请稍后重试。</div>`;
             }
 
             chatBox.scrollTop = chatBox.scrollHeight;
         }
     </script>
-
 </body>
 </html>
